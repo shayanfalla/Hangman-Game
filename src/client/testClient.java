@@ -14,7 +14,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package client;
 
 import java.io.*;
@@ -45,12 +44,13 @@ public class testClient {
             Scanner userEntry = new Scanner(System.in);
             String message, response;
 
+            System.out.println("Enter message ('QUIT' to exit): ");
             do {
-                System.out.println("Enter message ('QUIT' to exit): ");
                 message = userEntry.nextLine();
                 output.println(message);
                 response = input.nextLine();
-                System.out.println("Server: " + response);
+                System.out.println(response);
+                System.out.println("Enter message: ");
             } while (!message.equals("QUIT"));
         } catch (IOException e) {
             System.out.println("Something went wrong...");
