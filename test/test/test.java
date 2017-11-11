@@ -14,15 +14,20 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package hangman;
+package test;
 
-import java.io.*;
-import java.util.*;
+import hangman.hangman;
+import java.util.Scanner;
 
-public class hangman {
+/**
+ *
+ * @author Shayan Fallahian, shayanf@kth.se
+ */
+public class test {
 
-    private static final String FILENAME = "C:\\Users\\Shayan\\Documents\\NetBeansProjects\\Hangman-Game\\src\\hangman\\words.txt";
-
+    /**
+     * @param args the command line arguments
+     */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         hangman hang = new hangman();
@@ -34,7 +39,7 @@ public class hangman {
             char[] randomWordToGuess = word.toCharArray();
             int amountOfGuesses = randomWordToGuess.length;
             char[] playerGuess = new char[amountOfGuesses]; // Kommer se ut såhär: _ _ _ _ _ etc
-
+           
             for (int i = 0; i < playerGuess.length; i++) {
                 playerGuess[i] = '_';
             }
@@ -62,9 +67,7 @@ public class hangman {
                         wordIsGuessed = true;
                         System.out.println("Congratulations you won!");
                     }
-                    if (tries == amountOfGuesses) {
-                        wordIsGuessed = true;
-                    }
+                    if(tries == amountOfGuesses) wordIsGuessed = true;
                 }
             }
             if (wordIsGuessed) {
@@ -77,9 +80,8 @@ public class hangman {
                 weArePlaying = false;
             }
         }
-    }
 
-    
+    }
 
     public static void printArray(char[] array) {
         for (int i = 0; i < array.length; i++) {
@@ -96,24 +98,4 @@ public class hangman {
         }
         return true;
     }
-
-    public String readFile() {
-        BufferedReader br = null;
-        FileReader fr = null;
-        ArrayList<String> words = new ArrayList<String>();
-
-        try {
-            fr = new FileReader(FILENAME);
-            br = new BufferedReader(fr);
-            String word;
-            while ((word = br.readLine()) != null) {
-                words.add(word);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return words.get((int) (Math.random() * words.size()));
-    }
-
 }
