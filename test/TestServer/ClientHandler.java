@@ -40,16 +40,14 @@ public class ClientHandler extends Thread {
 
     @Override
     public void run() {
-        // String received;
         String word;
         boolean isWordGuessed;
         boolean playing = true;
         int tries;
+        int score = 0;
 
         do {
-            /*  // received = input.nextLine();
             word = read.readFile().toLowerCase();
-            // output.println("ECHO: " + word);
             System.out.println(word);
 
             char[] guessWord = word.toCharArray();
@@ -62,58 +60,60 @@ public class ClientHandler extends Thread {
 
             isWordGuessed = false;
             tries = 0;
+            output.println("\nWelcome (again) to the Hangman game made by Shayan Fallahian!\n");
+            output.printf("Your total score so far is: %d\n\n", score);
             while (!isWordGuessed && tries != totalTries) {
                 output.print("Current state: ");
                 printArray(playerGuess);
+                output.println("The choosen word is: " + word);
                 output.printf("You have %d tries left.\n", totalTries - tries);
                 output.printf("Enter a letter:\n");
-                char letter = input.nextLine().charAt(0);
+
+                String guessedWord = input.nextLine().toLowerCase();
+                char letter = guessedWord.charAt(0);
                 tries++;
 
                 if (letter == '-') {
-                    playing = false;
-                    isWordGuessed = true;
+                    try {
+                        playing = false;
+                        isWordGuessed = true;
+                        tries = totalTries;
+                        client.close();
+                    } catch (IOException e) {
+                    }
                 } else {
                     for (int i = 0; i < guessWord.length; i++) {
-                        if (guessWord[i] == letter) {
+                        if (guessWord[i] == letter && guessedWord.length() == 1) {
                             playerGuess[i] = letter;
                         }
                     }
-                    if (isWordGuessed(playerGuess)) {
+                    if (isWordGuessed(playerGuess) || word.equals(guessedWord)) {
                         isWordGuessed = true;
                         output.println("Congratulations you won!");
-                    }
-                    if (tries == totalTries) {
-                        isWordGuessed = true;
+                        score++;
                     }
                 }
             }
-            if (isWordGuessed) {
+            if (!isWordGuessed) {
                 output.println("You ran out of guesses.");
                 output.println("Word was " + word + ".");
-            }*/
+            }
             output.println("Do you want to play another game? (yes/no)");
-            if (input.nextLine().equals("no")) {
-                playing = false;
-                isWordGuessed = true;
-                System.out.println("Closing down connection.");
-                try {
-                    client.close();
-                } catch (IOException e) {
-                    System.out.println("Unable to disconnect!");
+            try {
+                if (input.nextLine().equals("no")) {
+                    playing = false;
+                    isWordGuessed = true;
+                    System.out.printf("Closing client connection.");
+                    try {
+                        client.close();
+                    } catch (IOException e) {
+                        System.out.println("Unable to disconnect!");
+                    }
                 }
+            } catch (java.util.NoSuchElementException e) {
+                System.out.println("Client: " + client.toString() + " ended the connection.");
             }
-
-        } while (/*!received.equals("QUIT") ||*/playing);
-
-        try {
-            if (client != null) {
-                System.out.println("Closing down connection.");
-                client.close();
-            }
-        } catch (IOException e) {
-            System.out.println("Unable to disconnect!");
-        }
+        } while (playing);
     }
 
     public void printArray(char[] array) {

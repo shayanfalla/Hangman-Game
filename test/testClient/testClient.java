@@ -37,6 +37,7 @@ public class testClient {
 
     private static void sendMessages() {
         Socket socket = null;
+        ListenerThread earThread;
         try {
             socket = new Socket(host, PORT);
             Scanner input = new Scanner(socket.getInputStream());
@@ -44,15 +45,15 @@ public class testClient {
             Scanner userEntry = new Scanner(System.in);
             String message, line = null;
 
-            System.out.println("Enter message ('QUIT' to exit): ");
+            earThread = new ListenerThread(socket);
+            earThread.start();
             do {
-                System.out.println(input.nextLine());
-                //   System.out.println(input.hasNext());
-                //  }
                 message = userEntry.nextLine();
+                if ((message.equals("-") || message.equals("no"))) {
+                    earThread.close();
+                }
                 output.println(message);
-                //System.out.println(input.nextLine());
-            } while (!message.equals("no"));
+            } while (!(message.equals("-") || message.equals("no")));
 
         } catch (IOException e) {
             System.out.println("Something went wrong...");
