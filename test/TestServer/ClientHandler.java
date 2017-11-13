@@ -92,7 +92,7 @@ public class ClientHandler extends Thread {
                         output.println("Congratulations you won!");
                         score++;
                     }
-                }
+                }   
             }
             if (!isWordGuessed) {
                 output.println("You ran out of guesses.");

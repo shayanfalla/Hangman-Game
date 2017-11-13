@@ -43,7 +43,7 @@ public class testClient {
             Scanner input = new Scanner(socket.getInputStream());
             PrintWriter output = new PrintWriter(socket.getOutputStream(), true);
             Scanner userEntry = new Scanner(System.in);
-            String message, line = null;
+            String message;
 
             earThread = new ListenerThread(socket);
             earThread.start();
