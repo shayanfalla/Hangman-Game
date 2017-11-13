@@ -26,55 +26,55 @@ public class hangman {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         hangman hang = new hangman();
-        boolean weArePlaying = true;
+        boolean playing = true;
 
-        while (weArePlaying) {
+        while (playing) {
             System.out.println("Welcome!\n");
             String word = hang.readFile().toLowerCase();
-            char[] randomWordToGuess = word.toCharArray();
-            int amountOfGuesses = randomWordToGuess.length;
-            char[] playerGuess = new char[amountOfGuesses]; // Kommer se ut såhär: _ _ _ _ _ etc
+            char[] guessWord = word.toCharArray();
+            int totalTries = guessWord.length + 3;
+            char[] playerGuess = new char[totalTries]; // Kommer se ut såhär: _ _ _ _ _ etc
 
             for (int i = 0; i < playerGuess.length; i++) {
                 playerGuess[i] = '_';
             }
 
-            boolean wordIsGuessed = false;
+            boolean isWordGuessed = false;
             int tries = 0;
-            while (!wordIsGuessed && tries != amountOfGuesses) {
+            while (!isWordGuessed && tries != totalTries) {
                 System.out.print("current guesses: ");
                 printArray(playerGuess);
-                System.out.printf("You have %d tries left.\n", amountOfGuesses - tries);
+                System.out.printf("You have %d tries left.\n", totalTries - tries);
                 System.out.println("Enter a letter");
                 char input = scanner.nextLine().charAt(0);
                 tries++;
 
                 if (input == '-') {
-                    weArePlaying = false;
-                    wordIsGuessed = true;
+                    playing = false;
+                    isWordGuessed = true;
                 } else {
-                    for (int i = 0; i < randomWordToGuess.length; i++) {
-                        if (randomWordToGuess[i] == input) {
+                    for (int i = 0; i < guessWord.length; i++) {
+                        if (guessWord[i] == input) {
                             playerGuess[i] = input;
                         }
                     }
                     if (isWordGuessed(playerGuess)) {
-                        wordIsGuessed = true;
+                        isWordGuessed = true;
                         System.out.println("Congratulations you won!");
                     }
-                    if (tries == amountOfGuesses) {
-                        wordIsGuessed = true;
+                    if (tries == totalTries) {
+                        isWordGuessed = true;
                     }
                 }
             }
-            if (wordIsGuessed) {
+            if (isWordGuessed) {
                 System.out.println("You ran out of guesses :/");
                 System.out.println("Word was: " + word);
             }
             System.out.println("Do you want to play another game? (yes/no)");
             String anothergame = scanner.nextLine();
             if (anothergame.equals("no")) {
-                weArePlaying = false;
+                playing = false;
             }
         }
     }
