@@ -14,24 +14,23 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package server;
+package server.net;
 
-import server.ClientHandler;
 import java.io.*;
 import java.net.*;
 
-public class testServer {
+public class ServerMain {
 
     private static ServerSocket serverSocket;
     private static final int PORT = 8080;
 
     public static void main(String[] Args) throws IOException {
-        System.out.println("Starting server...");
+        System.out.println("Starting server test server!...");
         serverSocket = new ServerSocket(PORT);
         System.out.println("\nRunning!");
         do {
             Socket client = serverSocket.accept();
-            System.out.println("\nNew client accepted. \n");
+            System.out.println("\nClient with " + client.toString() + " accepted. \n");
             ClientHandler handler = new ClientHandler(client);
             handler.start();
         } while (true);

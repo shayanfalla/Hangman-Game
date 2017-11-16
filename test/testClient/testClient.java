@@ -60,6 +60,7 @@ public class testClient {
         } finally {
             try {
                 System.out.println("\nClosing connection...");
+                System.exit(0);
                 socket.close();
             } catch (IOException e) {
                 System.out.println("Unable to disconnect!");

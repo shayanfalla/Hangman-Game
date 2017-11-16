@@ -29,32 +29,26 @@ public class ListenerThread extends Thread {
 
     private Socket client;
     private Scanner input;
-    private PrintWriter output;
     boolean running = true;
 
-    public ListenerThread(Socket socket) {
+    public ListenerThread(Socket socket) throws IOException {
         client = socket;
-
-        try {
-            input = new Scanner(client.getInputStream());
-            output = new PrintWriter(client.getOutputStream(), true);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        input = new Scanner(client.getInputStream());
     }
 
     @Override
     public void run() {
-        while(running){
-            try{
-        System.out.println(input.nextLine());
-            } catch(java.util.NoSuchElementException e){
+        while (running) {
+            try {
+                System.out.println(input.nextLine());
+            } catch (java.util.NoSuchElementException e) {
                 System.out.println("Connection Closed.");
+                System.exit(0);
             }
         }
     }
-    
-    public void close(){
+
+    public void close() {
         running = false;
     }
 }

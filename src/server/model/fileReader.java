@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package server;
+package server.model;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -23,9 +23,9 @@ import java.util.ArrayList;
 
 public class fileReader {
 
-    private static final String FILENAME = "C:\\Users\\Shayan\\Documents\\NetBeansProjects\\Hangman-Game\\src\\hangman\\words.txt";
-
-    public String fileReader() {
+    private static final String FILENAME = "C:\\Users\\Shayan\\Documents\\NetBeansProjects\\Hangman-Game\\src\\server\\model\\words.txt";
+    
+    public String readFile() {
         BufferedReader br = null;
         FileReader fr = null;
         ArrayList<String> words = new ArrayList<String>();

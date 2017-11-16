@@ -14,21 +14,19 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package TestServer;
+package server.net;
 
 import java.io.*;
 import java.net.*;
 import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import server.controller.Controller;
 
 public class ClientHandler extends Thread {
 
     private Socket client;
     private Scanner input;
     private PrintWriter output;
-    private fileReader read = new fileReader();
+    private Controller control = new Controller();
 
     public ClientHandler(Socket socket) {
         client = socket;
@@ -50,7 +48,7 @@ public class ClientHandler extends Thread {
         int score = 0;
 
         do {
-            word = read.readFile().toLowerCase();
+            word = control.getWord().toLowerCase();
 
             char[] guessWord = word.toCharArray();
             int totalTries = guessWord.length + 3;

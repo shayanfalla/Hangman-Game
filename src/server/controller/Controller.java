@@ -14,25 +14,15 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package TestServer;
+package server.controller;
 
-import java.io.*;
-import java.net.*;
+import server.model.fileReader;
 
-public class testServer {
+public class Controller {
 
-    private static ServerSocket serverSocket;
-    private static final int PORT = 8080;
-
-    public static void main(String[] Args) throws IOException {
-        System.out.println("Starting server test server!...");
-        serverSocket = new ServerSocket(PORT);
-        System.out.println("\nRunning!");
-        do {
-            Socket client = serverSocket.accept();
-            System.out.println("\nClient with " + client.toString() + " accepted. \n");
-            ClientHandler handler = new ClientHandler(client);
-            handler.start();
-        } while (true);
+    public String getWord(){
+        fileReader read = new fileReader();
+        return read.readFile();
     }
+
 }

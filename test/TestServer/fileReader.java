@@ -23,12 +23,12 @@ import java.util.ArrayList;
 
 public class fileReader {
 
-    private static final String FILENAME = "C:\\Users\\Shayan\\Documents\\NetBeansProjects\\Hangman-Game\\src\\hangman\\words.txt";
-
+    private static final String FILENAME = "C:\\Users\\Shayan\\Documents\\NetBeansProjects\\Hangman-Game\\src\\server\\model\\words.txt";
+    
     public String readFile() {
-        BufferedReader br = null;
-        FileReader fr = null;
-        ArrayList<String> words = new ArrayList<String>();
+        BufferedReader br;
+        FileReader fr;
+        ArrayList<String> words = new ArrayList<>();
 
         try {
             fr = new FileReader(FILENAME);
@@ -38,7 +38,6 @@ public class fileReader {
                 words.add(word);
             }
         } catch (IOException e) {
-            e.printStackTrace();
         }
 
         return words.get((int) (Math.random() * words.size()));
