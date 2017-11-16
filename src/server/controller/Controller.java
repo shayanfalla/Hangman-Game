@@ -16,11 +16,12 @@
  */
 package server.controller;
 
+import java.io.IOException;
 import server.model.fileReader;
 
 public class Controller {
 
-    public String getWord(){
+    public String getWord() throws IOException{
         fileReader read = new fileReader();
         return read.readFile();
     }
