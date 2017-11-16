@@ -16,6 +16,7 @@
  */
 package client.controller;
 
+import client.net.InitSocket;
 import client.net.ListenerThread;
 import client.net.TalkThread;
 import java.io.IOException;
@@ -25,6 +26,7 @@ import java.net.UnknownHostException;
 
 public final class Controller {
 
+    private InitSocket init;
     private ListenerThread inputThread;
     private TalkThread outputThread;
     private final Socket clientSocket;
@@ -36,10 +38,15 @@ public final class Controller {
             host = InetAddress.getLocalHost();
         } catch (UnknownHostException e) {
         }
-
-        clientSocket = new Socket(host, PORT);
+        
+        clientSocket = getSocket();
         StartCommunication();
         StartListening();
+    }
+    
+    Socket getSocket() throws IOException{
+       init = new InitSocket();
+        return  init.getSocket();
     }
 
     void StartCommunication() throws IOException {

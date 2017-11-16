@@ -59,7 +59,7 @@ public class ClientHandler extends Thread {
             output.println("\nWelcome (again) to the Hangman game made by Shayan Fallahian! (shayanf@kth.se)\n");
             output.printf("Your total score so far is: %d\n\n", score);
             while (!isWordGuessed && tries != totalTries) {
-                output.print("Current state: ");
+                output.print("\nCurrent state: ");
                 printArray(playerGuess);
                 output.printf("You have %d tries left.\n", totalTries - tries);
                 output.printf("Enter a letter! ('-' to quit)\n");
@@ -86,7 +86,6 @@ public class ClientHandler extends Thread {
                     }
                 } catch (java.lang.StringIndexOutOfBoundsException e) {
                     output.println("\nYou have to enter something!\n");
-                    tries--;
                 }
                 if (isWordGuessed(playerGuess) || word.equals(guessedWord)) {
                     isWordGuessed = true;
@@ -121,7 +120,7 @@ public class ClientHandler extends Thread {
         for (int i = 0; i < array.length; i++) {
             output.print(array[i] + " ");
         }
-        output.println();
+        output.print("\n\n");
     }
 
     public boolean isWordGuessed(char[] array) {
