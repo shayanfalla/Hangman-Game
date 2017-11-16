@@ -23,14 +23,14 @@ import java.util.ArrayList;
 
 public class fileReader {
 
-    private static final String FILENAME = "C:\\Users\\Shayan\\Documents\\NetBeansProjects\\Hangman-Game\\src\\server\\model\\words.txt";
+    private static final String FILEPATH = System.getProperty("user.dir") + "\\src\\server\\model\\words.txt";
 
     public String readFile() throws IOException {
         BufferedReader br = null;
         FileReader fr = null;
         ArrayList<String> words = new ArrayList<String>();
 
-        fr = new FileReader(FILENAME);
+        fr = new FileReader(FILEPATH);
         br = new BufferedReader(fr);
         String word;
         while ((word = br.readLine()) != null) {

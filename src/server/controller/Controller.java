@@ -21,9 +21,15 @@ import server.model.fileReader;
 
 public class Controller {
 
-    public String getWord() throws IOException{
-        fileReader read = new fileReader();
-        return read.readFile();
+    fileReader read = new fileReader();
+
+    public String getWord() {
+        String word = null;
+        try {
+            word = read.readFile();
+        } catch (IOException x) {
+        }
+        return word;
     }
 
 }

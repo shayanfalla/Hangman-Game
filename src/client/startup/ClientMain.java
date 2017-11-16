@@ -16,12 +16,12 @@
  */
 package client.startup;
 
-import client.view.*;
+import client.view.ClassView;
 import java.io.IOException;
 
 public class ClientMain {
 
     public static void main(String[] Args) throws IOException {
-        ClientView cv = new ClientView();
+        ClassView cv = new ClassView();
     }
 }

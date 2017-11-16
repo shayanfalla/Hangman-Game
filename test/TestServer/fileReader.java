@@ -23,7 +23,7 @@ import java.util.ArrayList;
 
 public class fileReader {
 
-    private static final String FILENAME = "C:\\Users\\Shayan\\Documents\\NetBeansProjects\\Hangman-Game\\src\\server\\model\\words.txt";
+    private static final String FILENAME = System.getProperty("user.dir") + "\\src\\server\\model\\words.txt";
     
     public String readFile() {
         BufferedReader br;

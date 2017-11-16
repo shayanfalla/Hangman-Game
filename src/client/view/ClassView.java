@@ -14,17 +14,17 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 package client.view;
 
 import client.controller.Controller;
 import java.io.IOException;
 
-public class ClientView {
-
+public class ClassView {
+    
     Controller control;
 
-    public ClientView() throws IOException {
-        control = new Controller();
+    public ClassView() throws IOException{
+                   control = new Controller();
     }
-
 }

@@ -22,8 +22,7 @@ import java.util.Scanner;
 public class test {
 
     public static void main(String [] args){
-        Scanner scan = new Scanner(System.in);
-        String word = scan.nextLine();
-        System.out.println(word + "Has the char length: " + word.length() );
+        System.out.println(System.getProperty("user.dir") + "\\src\\server\\model\\words.txt");
+        
     }
 }
