@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Shayan
+ * Copyright (C) 2017 Shayan Fallahian shayanf@kth.se
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,10 +14,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package testClient;
+package client.net;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
 

@@ -14,13 +14,13 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package client;
+package client.net;
 
 import java.io.*;
 import java.net.*;
 import java.util.*;
 
-public class testClient {
+public class ClientMain {
 
     private static InetAddress host;
     private static final int PORT = 8080;
@@ -37,31 +37,33 @@ public class testClient {
 
     private static void sendMessages() {
         Socket socket = null;
+        ListenerThread earThread;
         try {
             socket = new Socket(host, PORT);
             Scanner input = new Scanner(socket.getInputStream());
             PrintWriter output = new PrintWriter(socket.getOutputStream(), true);
             Scanner userEntry = new Scanner(System.in);
-            String message, response;
+            String message;
 
-            System.out.println("Enter message ('QUIT' to exit): ");
+            earThread = new ListenerThread(socket);
+            earThread.start();
             do {
                 message = userEntry.nextLine();
+                if ((message.equals("-") || message.equals("no"))) {
+                    earThread.close();
+                }
                 output.println(message);
-                response = input.nextLine();
-                System.out.println(response);
-                System.out.println("Enter message: ");
-            } while (!message.equals("QUIT"));
+            } while (!(message.equals("-") || message.equals("no")));
+
         } catch (IOException e) {
             System.out.println("Something went wrong...");
-            e.printStackTrace();
         } finally {
             try {
                 System.out.println("\nClosing connection...");
+                System.exit(0);
                 socket.close();
             } catch (IOException e) {
                 System.out.println("Unable to disconnect!");
-                e.printStackTrace();
             }
         }
     }

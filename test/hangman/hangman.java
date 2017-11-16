@@ -21,7 +21,7 @@ import java.util.*;
 
 public class hangman {
 
-    private static final String FILENAME = "C:\\Users\\Shayan\\Documents\\NetBeansProjects\\Hangman-Game\\src\\hangman\\words.txt";
+    private static final String FILENAME = "C:\\Users\\Shayan\\Documents\\NetBeansProjects\\Hangman-Game\\test\\hangman\\words.txt";
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);

@@ -25,7 +25,7 @@ public class ServerMain {
     private static final int PORT = 8080;
 
     public static void main(String[] Args) throws IOException {
-        System.out.println("Starting server test server!...");
+        System.out.println("Starting server!...");
         serverSocket = new ServerSocket(PORT);
         System.out.println("\nRunning!");
         do {
