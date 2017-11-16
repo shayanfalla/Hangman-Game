@@ -14,29 +14,16 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package client.net;
 
-import java.io.IOException;
-import java.net.Socket;
+package hangman;
+
 import java.util.Scanner;
 
-public class ListenerThread extends Thread {
+public class test {
 
-    private final Scanner input;
-
-    public ListenerThread(Socket socket) throws IOException {
-        input = new Scanner(socket.getInputStream());
-    }
-
-    @Override
-    public void run() {
-        while (true) {
-            try {
-                System.out.println(input.nextLine());
-            } catch (java.util.NoSuchElementException e) {
-                System.out.println("Connection Closed.");
-                System.exit(0);
-            }
-        }
+    public static void main(String [] args){
+        Scanner scan = new Scanner(System.in);
+        String word = scan.nextLine();
+        System.out.println(word + "Has the char length: " + word.length() );
     }
 }

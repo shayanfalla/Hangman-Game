@@ -28,15 +28,10 @@ public class ClientHandler extends Thread {
     private PrintWriter output;
     private Controller control = new Controller();
 
-    public ClientHandler(Socket socket) {
+    public ClientHandler(Socket socket) throws IOException {
         client = socket;
-
-        try {
-            input = new Scanner(client.getInputStream());
-            output = new PrintWriter(client.getOutputStream(), true);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        input = new Scanner(client.getInputStream());
+        output = new PrintWriter(client.getOutputStream(), true);
     }
 
     @Override
@@ -51,7 +46,7 @@ public class ClientHandler extends Thread {
             word = control.getWord().toLowerCase();
 
             char[] guessWord = word.toCharArray();
-            int totalTries = guessWord.length + 3;
+            int totalTries = guessWord.length;
             //output.println(word);
             char[] playerGuess = new char[totalTries];
 
@@ -61,39 +56,45 @@ public class ClientHandler extends Thread {
 
             isWordGuessed = false;
             tries = 0;
-            output.println("\nWelcome (again) to the Hangman game made by Shayan Fallahian!\n");
+            output.println("\nWelcome (again) to the Hangman game made by Shayan Fallahian! (shayanf@kth.se)\n");
             output.printf("Your total score so far is: %d\n\n", score);
             while (!isWordGuessed && tries != totalTries) {
                 output.print("Current state: ");
                 printArray(playerGuess);
                 output.printf("You have %d tries left.\n", totalTries - tries);
                 output.printf("Enter a letter! ('-' to quit)\n");
-                
                 String guessedWord = input.nextLine().toLowerCase();
-                char letter = guessedWord.charAt(0);
-                tries++;
 
-                if (letter == '-') {
-                    try {
-                        playing = false;
-                        isWordGuessed = true;
-                        tries = totalTries;
-                        client.close();
-                    } catch (IOException e) {
-                    }
-                } else {
-                    for (int i = 0; i < guessWord.length; i++) {
-                        if (guessWord[i] == letter && guessedWord.length() == 1) {
-                            playerGuess[i] = letter;
+                try {
+                    char letter = guessedWord.charAt(0);
+                    tries++;
+
+                    if (letter == '-') {
+                        try {
+                            playing = false;
+                            isWordGuessed = true;
+                            tries = totalTries;
+                            client.close();
+                        } catch (IOException e) {
+                        }
+                    } else {
+                        for (int i = 0; i < guessWord.length; i++) {
+                            if (guessWord[i] == letter && guessedWord.length() == 1) {
+                                playerGuess[i] = letter;
+                            }
                         }
                     }
-                    if (isWordGuessed(playerGuess) || word.equals(guessedWord)) {
-                        isWordGuessed = true;
-                        output.println("Congratulations you won!");
-                        score++;
-                    }
+                } catch (java.lang.StringIndexOutOfBoundsException e) {
+                    output.println("\nYou have to enter something!\n");
+                    tries--;
+                }
+                if (isWordGuessed(playerGuess) || word.equals(guessedWord)) {
+                    isWordGuessed = true;
+                    output.println("Congratulations you won!");
+                    score++;
                 }
             }
+
             if (!isWordGuessed) {
                 output.println("You ran out of guesses.");
                 output.println("Word was " + word + ".");

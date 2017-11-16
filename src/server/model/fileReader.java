@@ -24,21 +24,17 @@ import java.util.ArrayList;
 public class fileReader {
 
     private static final String FILENAME = "C:\\Users\\Shayan\\Documents\\NetBeansProjects\\Hangman-Game\\src\\server\\model\\words.txt";
-    
-    public String readFile() {
+
+    public String readFile() throws IOException {
         BufferedReader br = null;
         FileReader fr = null;
         ArrayList<String> words = new ArrayList<String>();
 
-        try {
-            fr = new FileReader(FILENAME);
-            br = new BufferedReader(fr);
-            String word;
-            while ((word = br.readLine()) != null) {
-                words.add(word);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        fr = new FileReader(FILENAME);
+        br = new BufferedReader(fr);
+        String word;
+        while ((word = br.readLine()) != null) {
+            words.add(word);
         }
 
         return words.get((int) (Math.random() * words.size()));

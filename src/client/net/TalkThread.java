@@ -16,27 +16,30 @@
  */
 package client.net;
 
-import java.io.IOException;
-import java.net.Socket;
-import java.util.Scanner;
+import java.io.*;
+import java.net.*;
+import java.util.*;
 
-public class ListenerThread extends Thread {
+public class TalkThread extends Thread {
 
-    private final Scanner input;
+    private final PrintWriter output;
+    private final Scanner userEntry;
 
-    public ListenerThread(Socket socket) throws IOException {
-        input = new Scanner(socket.getInputStream());
+    public TalkThread(Socket socket) throws IOException {
+        this.userEntry = new Scanner(System.in);
+        output = new PrintWriter(socket.getOutputStream(), true);
     }
 
     @Override
     public void run() {
-        while (true) {
-            try {
-                System.out.println(input.nextLine());
-            } catch (java.util.NoSuchElementException e) {
-                System.out.println("Connection Closed.");
-                System.exit(0);
-            }
-        }
+        String message;
+
+        do {
+            message = userEntry.nextLine();
+            output.println(message);
+        } while (!(message.equals("-") || message.equals("no")));
+
+        System.out.println("\nClosing connection...");
+        System.exit(0);
     }
 }

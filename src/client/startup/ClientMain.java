@@ -14,29 +14,14 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package client.net;
+package client.startup;
 
+import client.view.*;
 import java.io.IOException;
-import java.net.Socket;
-import java.util.Scanner;
 
-public class ListenerThread extends Thread {
+public class ClientMain {
 
-    private final Scanner input;
-
-    public ListenerThread(Socket socket) throws IOException {
-        input = new Scanner(socket.getInputStream());
-    }
-
-    @Override
-    public void run() {
-        while (true) {
-            try {
-                System.out.println(input.nextLine());
-            } catch (java.util.NoSuchElementException e) {
-                System.out.println("Connection Closed.");
-                System.exit(0);
-            }
-        }
+    public static void main(String[] Args) throws IOException {
+        ClientView cv = new ClientView();
     }
 }
