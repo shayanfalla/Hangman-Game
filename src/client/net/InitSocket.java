@@ -28,6 +28,7 @@ public class InitSocket {
     private final int PORT = 8080;
     private String HOST = null;
 
+    // Establishes a connection to the server using either the desire IP address or the localhost
     public InitSocket() throws IOException {
         System.out.println("Hi, before we start, enter the IP address! (press enter if localhost)");
         Scanner hostis = new Scanner(System.in);
