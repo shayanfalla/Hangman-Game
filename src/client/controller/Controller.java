@@ -20,9 +20,7 @@ import client.net.InitSocket;
 import client.net.ListenerThread;
 import client.net.TalkThread;
 import java.io.IOException;
-import java.net.InetAddress;
 import java.net.Socket;
-import java.net.UnknownHostException;
 
 public final class Controller {
 
@@ -30,14 +28,8 @@ public final class Controller {
     private ListenerThread inputThread;
     private TalkThread outputThread;
     private final Socket clientSocket;
-    private static InetAddress host;
-    private static final int PORT = 8080;
 
     public Controller() throws IOException {
-        try {
-            host = InetAddress.getLocalHost();
-        } catch (UnknownHostException e) {
-        }
         
         clientSocket = getSocket();
         StartCommunication();
