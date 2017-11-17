@@ -28,6 +28,8 @@ public class ListenerThread extends Thread {
         input = new Scanner(socket.getInputStream());
     }
 
+    //Continously listens for inputs from the server until
+    //the connection is closed from the server side
     @Override
     public void run() {
         while (true) {
