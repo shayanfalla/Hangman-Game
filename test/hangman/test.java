@@ -14,15 +14,15 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package hangman;
 
 import java.util.Scanner;
 
 public class test {
 
-    public static void main(String [] args){
-        System.out.println(System.getProperty("user.dir") + "\\src\\server\\model\\words.txt");
-        
+    public static void main(String[] args) {
+        System.out.printf("%-30s %s %30s\n", "Word", "Attempts left", "Total Score");
+        System.out.printf("%-30s %s %31d", "_ _ _ _ _ _ _ _ _", "40", 3);
+        System.out.printf("%30s", "hey");
     }
 }

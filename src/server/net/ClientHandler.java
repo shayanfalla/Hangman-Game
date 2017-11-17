@@ -47,7 +47,6 @@ public class ClientHandler extends Thread {
 
             char[] guessWord = word.toCharArray();
             int totalTries = guessWord.length;
-            //output.println(word);
             char[] playerGuess = new char[totalTries];
 
             for (int i = 0; i < playerGuess.length; i++) {
@@ -95,7 +94,7 @@ public class ClientHandler extends Thread {
             }
 
             if (!isWordGuessed) {
-                output.println("You ran out of guesses.");
+                output.println("\nYou ran out of guesses.");
                 output.println("Word was " + word + ".");
             }
             output.println("Do you want to play another game? (yes/no)");
