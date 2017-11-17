@@ -61,8 +61,8 @@ public class ClientHandler extends Thread {
                 output.print("\nCurrent state: ");
                 printArray(playerGuess);
                 output.printf("You have %d tries left.\n", totalTries - tries);
-                output.printf("Enter a letter! ('-' to quit)\n");
-                String guessedWord = input.nextLine().toLowerCase();
+                output.printf("Enter a letter or word! ('-' to quit)\n");
+                String guessedWord = input.nextLine().toLowerCase();       
 
                 try {
                     char letter = guessedWord.charAt(0);
@@ -99,10 +99,11 @@ public class ClientHandler extends Thread {
             }
             output.println("Do you want to play another game? (yes/no)");
             try {
-                if (input.nextLine().equals("no")) {
+                String temp = input.nextLine();
+                if (temp.equals("no") || temp.equals("-")) {
                     playing = false;
                     isWordGuessed = true;
-                    System.out.println(client.toString() + " ended the connection.");
+                    System.out.println("Client with " + client.toString() + " ended the connection.");
                     try {
                         client.close();
                     } catch (IOException e) {
@@ -110,7 +111,7 @@ public class ClientHandler extends Thread {
                     }
                 }
             } catch (java.util.NoSuchElementException e) {
-                System.out.println(client.toString() + " ended the connection.");
+                System.out.println("Client with " + client.toString() + " ended the connection.\n");
             }
         } while (playing);
     }

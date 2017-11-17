@@ -27,10 +27,10 @@ public class ServerMain {
     public static void main(String[] Args) throws IOException {
         System.out.println("Starting server!...");
         serverSocket = new ServerSocket(PORT);
-        System.out.println("\nRunning!");
+        System.out.println("\nRunning!\n");
         do {
             Socket client = serverSocket.accept();
-            System.out.println("\nClient with " + client.toString() + " accepted. \n");
+            System.out.println("Client with " + client.toString() + " accepted. \n");
             ClientHandler handler = new ClientHandler(client);
             handler.start();
         } while (true);

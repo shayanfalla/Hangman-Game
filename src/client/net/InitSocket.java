@@ -25,22 +25,17 @@ public class InitSocket {
 
     private Scanner write = new Scanner(System.in);
     private Socket socket;
-    private String PORT = null;
+    private final int PORT = 8080;
     private String HOST = null;
 
     public InitSocket() throws IOException {
-        System.out.println("Hi, Before we start, enter the port! (default is 8080)");
-        PORT = write.nextLine();
-        if ("".equals(PORT)) {
-            PORT = "8080";
-        }
-        System.out.println("Now enter the IP address! (default will be your localhost)");
+        System.out.println("Hi, before we start, enter the IP address! (press enter if localhost)");
         Scanner hostis = new Scanner(System.in);
         HOST = hostis.nextLine();
         if (HOST == null) {
             HOST = InetAddress.getLocalHost().toString();
         }
-        socket = new Socket(HOST, Integer.parseInt(PORT));
+        socket = new Socket(HOST, PORT);
     }
 
     public Socket getSocket() {
