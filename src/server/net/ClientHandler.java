@@ -34,6 +34,9 @@ public class ClientHandler extends Thread {
         output = new PrintWriter(client.getOutputStream(), true);
     }
 
+    //This is where the client is handled
+    //The outer do while loop keeps track of the entire gamesession
+    //while the inner while loop keeps track of one game session (i.e word guessing)
     @Override
     public void run() {
         String word;
