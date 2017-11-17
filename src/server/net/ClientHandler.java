@@ -57,12 +57,14 @@ public class ClientHandler extends Thread {
             tries = 0;
             output.println("\nWelcome (again) to the Hangman game made by Shayan Fallahian! (shayanf@kth.se)\n");
             output.printf("Your total score so far is: %d\n\n", score);
+            output.printf("The word as %d letters.\n\n", totalTries);
+            output.print("Lets begin!\n");
             while (!isWordGuessed && tries != totalTries) {
                 output.print("\nCurrent state: ");
                 printArray(playerGuess);
                 output.printf("You have %d tries left.\n", totalTries - tries);
                 output.printf("Enter a letter or word! ('-' to quit)\n");
-                String guessedWord = input.nextLine().toLowerCase();       
+                String guessedWord = input.nextLine().toLowerCase();
 
                 try {
                     char letter = guessedWord.charAt(0);
