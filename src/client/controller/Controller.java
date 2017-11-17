@@ -36,16 +36,19 @@ public final class Controller {
         StartListening();
     }
     
+    //Establish a connection to the server.
     Socket getSocket() throws IOException{
        init = new InitSocket();
         return  init.getSocket();
     }
 
+    // Starts the thread that writes messages to the server
     void StartCommunication() throws IOException {
         outputThread = new TalkThread(clientSocket);
         outputThread.start();
     }
 
+    // Start the thread that waits for messages from the server
     void StartListening() throws IOException {
         inputThread = new ListenerThread(clientSocket);
         inputThread.start();
