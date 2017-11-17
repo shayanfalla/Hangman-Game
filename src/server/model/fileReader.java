@@ -25,6 +25,8 @@ public class fileReader {
 
     private static final String FILEPATH = System.getProperty("user.dir") + "\\src\\server\\model\\words.txt";
 
+    
+    //Reads from the file and returns a random word
     public String readFile() throws IOException {
         BufferedReader br = null;
         FileReader fr = null;
