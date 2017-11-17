@@ -30,6 +30,8 @@ public class TalkThread extends Thread {
         output = new PrintWriter(socket.getOutputStream(), true);
     }
 
+    //Continiously reads from the keyboard and sends it to the server
+    //Terminates the entire client side if '-' or 'no' is entered
     @Override
     public void run() {
         String message;
