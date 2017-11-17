@@ -24,6 +24,8 @@ public class ServerMain {
     private static ServerSocket serverSocket;
     private static final int PORT = 8080;
 
+    //Establishes itself on the given port and
+    //continously listens for clients and sends them to ClientHandler
     public static void main(String[] Args) throws IOException {
         System.out.println("Starting server!...");
         serverSocket = new ServerSocket(PORT);
