@@ -60,15 +60,14 @@ public class ClientHandler extends Thread {
             tries = 0;
             output.println("\nWelcome (again) to the Hangman game made by Shayan Fallahian! (shayanf@kth.se)\n");
             output.printf("Your total score so far is: %d\n\n", score);
-            output.printf("The word as %d letters.\n\n", totalTries);
+            output.printf("The word has %d letters.\n\n", totalTries);
             output.print("Lets begin!\n");
             while (!isWordGuessed && tries != totalTries) {
                 output.print("\nCurrent state: ");
                 printArray(playerGuess);
-                output.printf("You have %d tries left.\n", totalTries - tries);
+                output.printf("\nYou have %d tries left.\n", totalTries - tries);
                 output.printf("Enter a letter or word! ('-' to quit)\n");
                 String guessedWord = input.nextLine().toLowerCase();
-
                 try {
                     char letter = guessedWord.charAt(0);
                     tries++;
@@ -100,7 +99,9 @@ public class ClientHandler extends Thread {
 
             if (!isWordGuessed) {
                 output.println("\nYou ran out of guesses.");
-                output.println("Word was " + word + ".");
+                output.print("Your final state was: ");
+                printArray(playerGuess);
+                output.println("Word was " + word + ".\n");
             }
             output.println("Do you want to play another game? (yes/no)");
             try {
@@ -125,7 +126,7 @@ public class ClientHandler extends Thread {
         for (int i = 0; i < array.length; i++) {
             output.print(array[i] + " ");
         }
-        output.print("\n\n");
+        output.print("\n");
     }
 
     public boolean isWordGuessed(char[] array) {
